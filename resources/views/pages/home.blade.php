@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>AquaStream</title>
+  <title>Phsing_tv</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
@@ -50,7 +50,7 @@
     class="bg-white flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto border-b border-[#e2e8f0]">
     <a href="{{ route('home') }}"
       class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-      AquaStream
+      Phsing_tv
     </a>
     @if(session('user_id'))
       <div class="flex items-center gap-4">
@@ -63,7 +63,7 @@
     @else
       <a href="{{ route('login.view') }}"
         class="btn btn-primary bg-[#00796B] text-white font-medium px-6 py-2 rounded-full hover:bg-[#00695C] transition-all active:scale-95 shadow-sm">
-        登入
+        login
       </a>
     @endif
   </header>

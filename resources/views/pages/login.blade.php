@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>AquaStream - Login</title>
+  <title>Phsing_tv - Login</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap"
@@ -110,7 +110,7 @@
       <!-- <div class="text-2xl font-bold tracking-tight text-teal-700">AquaStream</div> -->
       <a href="{{ route('home') }}"
         class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-        AquaStream
+        Phsing_tv
       </a>
       <nav class="hidden md:flex gap-8">
         <!-- <a class="text-teal-700 font-semibold transition-opacity opacity-80" href="#">Login</a> -->
@@ -190,24 +190,12 @@
           <a class="text-primary font-bold hover:underline ml-1" href="{{ route('register.view') }}">Sign up</a>
         </p>
       </div>
-      <!-- Footer Graphic (Simple for Student Vibe) -->
-      <div class="mt-12 opacity-40 grayscale flex justify-center gap-4">
-        <img alt="Water graphic" class="w-8 h-8"
-          data-alt="minimalist wave icon in soft teal and blue palette with simple geometric lines"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC43_MGtWawjUGI4Ngl6TjfWg0nN5l2Eb9XpEnRtFWQiRba6ao8Ab13AIEgzp2aKOtsbjHRUBKAvRhPKirqO9P3yu5IokjJ2C1wI7iAX1KnY8FTKKJvXqJu5sM3ZPSFc24an8R7A50fHFEgeXzbnMcyU5hLFg7Iw3ogLIYaUU6vjrCgqDQAeYdHgkizMeGpwKDNRg2YVYZu5uwf8zo6eBTHQPa9jFggaUcpRgcKvG3qs7oDU1eA1dzEKvamhLsoSkabGwFvK_cfFlaP" />
-        <img alt="Science graphic" class="w-8 h-8"
-          data-alt="minimalist microscope icon representing scientific water testing in clean modern style"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0mdv4oo9zBXIVY1dua45My9vrg2YLATihHdz1UuuE5j3qRIkptZkZXmPlLo4iv-QKLta1ABmpxUzQY9LHH945AQudWvH1he4LsKZPKfFSDV5aorYD2PO5svf2iisNd7oovOqHKtVG-zINLb-x2oHN2ak7apbgm0p_E13sd4oznnbHLkFaVGs_hRSwnCB3kbU7pHQqEugF-nzrocNkQvJ-MeC3SL95p7ZyuInYXJpZQEBNczrrvrKg_2tN9kZ8lJuQLXY-U_RmmdYH" />
-        <img alt="Data graphic" class="w-8 h-8"
-          data-alt="minimalist bar chart icon representing water data collection and analysis"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7yadiDqZ5bq7uPhGR_zcqassgLL1vN6bKxSOLTAvQkp32FnCT_N21tHjTtgOF8ka_rQrX1cbhyLw_U2jXeBqmj3qi4lzvJJs3jfBGt4_8d1IB4BuRDBwF7aszqZsMwojX4qA0pJFzWOQsHPVWlyegfOsC-q3ZZJ-B7sFP4st5xyFBuYcMSs3UwSDSSn17kc0zXHhT4VMydCZRRczZMtQoqiGoYDKfKz7Xbtp6KTQOfq5Llx-Bnn2bC4gj7Dc302V2egdB4NbcItbj" />
-      </div>
     </div>
   </main>
   <!-- Footer Section -->
   <footer class="bg-slate-50 border-t border-slate-200 mt-auto">
     <div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-7xl mx-auto gap-4">
-      <div class="text-lg font-bold text-slate-900">AquaStream</div>
+      <div class="text-lg font-bold text-slate-900">Phsing_tv</div>
       <div class="text-xs font-medium tracking-wide text-slate-500 uppercase">
         © 2024 AquaStream Student Project
       </div>
