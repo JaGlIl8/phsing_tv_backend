@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
+<?php
+$specifiedTime = mktime(12, 55, 0, 12, 25, 2009);
 
-<head>
-    <meta charset="UTF-8">
-    <title>SVG X Icon</title>
-</head>
+echo "指定時間刻印：" . $specifiedTime . "<br>";
+echo date("Y年m月d日H時i分s秒", $specifiedTime) . "<br>";
+echo "這一年第" . date("z", $specifiedTime) . "天<br>";
 
-<body>
+echo "<br>";
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-        <line x2="63.97" stroke="#000" x1="63.73" y1="32.18" y2="51.7" />
-        <line x2="63.97" stroke="#000" x1="83.8" y1="51.62" y2="51.7" />
-        <line x2="64.27" stroke="#000" x1="83.8" y1="51.62" y2="32.25" />
-    </svg>
-
-</body>
-
-</html>
+$currentTime = time();
+echo "現在時間刻印：" . $currentTime . "<br>";
+echo "現在時間：" . date("Y/n/j g:i:s A", $currentTime);
+?>

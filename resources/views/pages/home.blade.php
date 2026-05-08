@@ -73,13 +73,18 @@
       <!-- 2x2 Grid of Live Streams -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Stream Card 1 -->
-        <div class="flex flex-col gap-3">
-          <div class="aspect-video rounded-xl overflow-hidden shadow-md bg-white border border-[#e2e8f0]">
-            <img alt="Goldfish in a clean tank" class="w-full h-full object-cover"
-              data-alt="Close up of goldfish swimming in tank"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx9U2Ts4oLR0BtPJpbumMX_PHSTbvZj0yGUeoHCowzDcqvJcN3PhK0DA_WlmSCgBH75DTRArfnr7b4FlOM_4Z0hg0sNMEJLnj0trBgB1HvH0A5uGka3iqoo0lVyz37xf6R9oad1x-uzYGNhZQ9hkDTOgwcd1nhEkcnABB2afnflmTXFPglQ6NwuodK1ScJNbKuSRXE0zM6DL55RK2vXucDWajM2o2yWkjTAnd3leQ6gPmcshTHCwVP1JaBvSGIu_kUNbZg2-y-9pgJ" />
+        <div class="group cursor-pointer" onclick="window.location.href='{{ route('stream.view') }}'">
+          <div class="aspect-video rounded-xl overflow-hidden shadow-md bg-white border border-slate-200 relative">
+            <img alt="Planted freshwater tank"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoGlrDy6esWksI7SQ4KN76WzRplQ34ABWngzy3oiQxkVvwX7F350WDphbLJOvf9zJK8fLUZXrU1HtW2GfOmhaeSiEcCoqJ0BwuqCsvE6Bn9CSjdAn8xLkH-mXA8eHGKPE46tQOsoIx3ACp29mfBADrxLkhLwTGetnzUw9gHe7gRDN_StzjhrGszF4yFU7QtaBKW7Y55vNUa0PqE8AFjABgwux0JwNtr0HQsdvXbLwEA3l1R4Y2H9xydq5BJ8xocm3CBOZLWf7gGODC" />
+            <div
+              class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+            </div>
           </div>
-          <h3 class="font-headline text-lg font-bold text-[#334155] px-1">Goldfish World</h3>
+          <h3
+            class="font-headline text-lg font-bold text-slate-700 px-1 mt-2 group-hover:text-primary transition-colors">
+            Nature Aquascape</h3>
         </div>
         <!-- Stream Card 2 -->
         <div class="flex flex-col gap-3">

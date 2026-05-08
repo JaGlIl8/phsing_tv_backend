@@ -168,12 +168,19 @@
             </div>
           </div>
           Primary Action
-          <button id="submit"
-            class="w-full bg-primary text-on-primary font-semibold py-3 px-4 rounded-lg shadow-[inset_0_-2px_0_rgba(0,0,0,0.1)] hover:bg-primary-dim transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-            type="submit">
-            Login
-            <span class="material-symbols-outlined text-lg" data-icon="login">login</span>
-          </button>
+          <!-- 原本的按鈕位置 -->
+          <!-- 增加 Y 軸伸縮空間的容器 -->
+          <!-- h-32 提供約 128px 的高度，items-center 讓按鈕預設在中間 -->
+          <div id="button-container"
+            class="relative w-full h-32 flex items-center justify-center  rounded-lg p-2 overflow-hidden">
+            <!-- 新增一個提示文字，讓使用者知道發生什麼事（選用） -->
+            <button id="submit"
+              class="w-full bg-primary text-on-primary font-semibold py-3 px-4 rounded-lg shadow-[inset_0_-2px_0_rgba(0,0,0,0.1)] hover:bg-primary-dim transition-all active:scale-[0.98] flex items-center justify-center gap-2 z-10"
+              type="submit">
+              Login
+              <span class="material-symbols-outlined text-lg" data-icon="login">login</span>
+            </button>
+          </div>
         </form>
         <!-- Divider -->
         <div class="relative my-8">
@@ -216,35 +223,44 @@
   const btn = document.getElementById('submit');
   const acInput = document.getElementById('username');
   const passInput = document.getElementById('password');
-  const form = btn.closest('form'); // 確保抓到 form
+  // 限制範圍改為這個容器
+  const container = document.getElementById('button-container');
 
   btn.addEventListener('mouseenter', () => {
     const isFilled = acInput.value.trim() !== '' && passInput.value.trim() !== '';
 
     if (!isFilled) {
-      // 取得父容器 (Form) 的實際寬高
-      const maxX = form.clientWidth - btn.offsetWidth;
-      const maxY = form.clientHeight - btn.offsetHeight;
+      // 進入跑酷模式
+      btn.style.position = 'absolute';
+      btn.style.zIndex = '20'; // 確保在提示文字上面
+      btn.style.width = '120px'; // 縮小寬度
 
-      // 產生隨機位置
+      // 關鍵：計算在 container 內的可用範圍
+      // maxX = 容器寬度 - 按鈕寬度
+      // maxY = 容器高度 - 按鈕高度
+      const maxX = container.clientWidth - btn.offsetWidth;
+      const maxY = container.clientHeight - btn.offsetHeight;
+
+      // 在容器範圍內產生隨機座標
       const randomX = Math.floor(Math.random() * maxX);
       const randomY = Math.floor(Math.random() * maxY);
 
-      // 更新位置
+      // 應用座標 (相對於 container)
       btn.style.left = `${randomX}px`;
       btn.style.top = `${randomY}px`;
     }
   });
 
-  // 加上一個「重置」邏輯：當填寫完成時，按鈕回到原位
+  // 重置邏輯：填寫完成時回到原位
   [acInput, passInput].forEach(input => {
     input.addEventListener('input', () => {
       const isFilled = acInput.value.trim() !== '' && passInput.value.trim() !== '';
       if (isFilled) {
-        btn.style.position = 'static'; // 恢復正常佈局
+        btn.style.position = 'static';
         btn.style.width = '100%';
-      } else {
-        btn.style.position = 'absolute';
+        // 清除樣式
+        btn.style.left = 'auto';
+        btn.style.top = 'auto';
       }
     });
   });
