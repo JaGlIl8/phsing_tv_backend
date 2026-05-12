@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Phsing_tv - Login</title>
+  <title>PheeShing.TV - Login</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&amp;family=Inter:wght@400;500;600&amp;display=swap"
@@ -110,7 +110,7 @@
       <!-- <div class="text-2xl font-bold tracking-tight text-teal-700">AquaStream</div> -->
       <a href="{{ route('home') }}"
         class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-        Phsing_tv
+        PheeShing.TV
       </a>
       <nav class="hidden md:flex gap-8">
         <!-- <a class="text-teal-700 font-semibold transition-opacity opacity-80" href="#">Login</a> -->
@@ -202,7 +202,7 @@
   <!-- Footer Section -->
   <footer class="bg-slate-50 border-t border-slate-200 mt-auto">
     <div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-7xl mx-auto gap-4">
-      <div class="text-lg font-bold text-slate-900">Phsing_tv</div>
+      <div class="text-lg font-bold text-slate-900">PheeShing.TV</div>
       <div class="text-xs font-medium tracking-wide text-slate-500 uppercase">
         © 2024 AquaStream Student Project
       </div>

@@ -80,7 +80,9 @@
       font-family: 'Inter', sans-serif;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       font-family: 'Manrope', sans-serif;
     }
 
@@ -99,19 +101,26 @@
         <!-- <span class="text-2xl font-bold tracking-tight text-teal-700">AquaStream</span> -->
         <a href="{{ route('home') }}"
           class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-          Phsing_tv
+          PheeShing.TV
         </a>
         <nav class="hidden md:flex gap-6">
-          <a href='/' class="text-slate-600 hover:bg-slate-50 transition-colors px-3 py-1 rounded cursor-pointer">Home</a>
+          <a href='/'
+            class="text-slate-600 hover:bg-slate-50 transition-colors px-3 py-1 rounded cursor-pointer">Home</a>
           <!-- <a class="text-slate-600 hover:bg-slate-50 transition-colors px-3 py-1 rounded cursor-pointer">Lab Reports</a> -->
         </nav>
       </div>
       @if(session('user_id'))
-        <div class="flex items-center gap-4">
-          <span class="text-slate-600">嗨, {{session('user_name')}}</span>
+        <div class="flex items-center gap-4 bg-slate-50 px-4 py-3 rounded-lg border border-slate-200">
+          <div class="flex items-center gap-3 flex-1">
+            <span class="material-symbols-outlined text-slate-600">account_circle</span>
+            <span class="text-slate-700 font-medium">嗨, {{session('user_name')}}</span>
+          </div>
           <form action="{{ route('logout.submit') }}" method="POST">
             @csrf
-            <button type="submit" class="text-sm text-red-500 hover:underline">登出</button>
+            <button type="submit"
+              class="text-sm text-red-500 hover:bg-red-50 hover:text-red-600 px-3 py-1.5 rounded transition-colors">
+              登出
+            </button>
           </form>
         </div>
       @else
@@ -133,17 +142,19 @@
             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          
+
           <!-- Live Indicators -->
           <div class="absolute top-4 left-4 flex items-center gap-2 pointer-events-none">
             <span class="flex h-3 w-3 relative">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
             </span>
-            <span class="bg-black/50 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Live</span>
-            <span class="bg-black/50 backdrop-blur-md text-white text-xs font-medium px-2 py-1 rounded flex items-center gap-1">
+            <span
+              class="bg-black/50 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Live</span>
+            <span
+              class="bg-black/50 backdrop-blur-md text-white text-xs font-medium px-2 py-1 rounded flex items-center gap-1">
               <span class="material-symbols-outlined text-[14px]">visibility</span>
-              <span id="viewerCount">142</span> Students
+              <span id="viewerCount">676767</span>
             </span>
           </div>
         </div>
@@ -155,7 +166,9 @@
             <p class="text-on-surface-variant max-w-2xl leading-relaxed"></p>
           </div>
           <div class="flex gap-3 shrink-0">
-            <button class="flex items-center gap-2 bg-surface-container-low text-on-surface px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors hover:bg-surface-container" onclick="copyLink()">
+            <button
+              class="flex items-center gap-2 bg-surface-container-low text-on-surface px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors hover:bg-surface-container"
+              onclick="copyLink()">
               <span class="material-symbols-outlined text-[20px]">share</span> 複製連結
             </button>
             <!-- <button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-sm">
@@ -167,10 +180,14 @@
         <!-- Species Chips -->
         <div class="flex flex-wrap gap-2 items-center">
           <span class="text-xs font-bold text-on-surface-variant uppercase mr-2">目前物種:</span>
-          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">圓盤魚</span>
-          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">霓虹燈魚</span>
-          <span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">鼠魚</span>
-          <span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-semibold">亞馬遜劍草</span>
+          <span
+            class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">圓盤魚</span>
+          <span
+            class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">霓虹燈魚</span>
+          <span
+            class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold">鼠魚</span>
+          <span
+            class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-semibold">亞馬遜劍草</span>
         </div>
       </div>
 
@@ -181,7 +198,6 @@
             <span class="material-symbols-outlined text-primary">assignment</span>
             <h2 class="font-bold text-on-surface">聊天室</h2>
           </div>
-          <span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase">Real-time</span>
         </div>
 
         <!-- Messages List -->
@@ -192,12 +208,10 @@
         <!-- Input Area -->
         <div class="p-5 bg-surface-container-lowest border-t border-outline-variant/15">
           <div class="relative">
-            <textarea
-              id="observationInput"
+            <textarea id="observationInput"
               class="w-full bg-surface-container-low border-none rounded-lg text-sm p-3 focus:ring-2 focus:ring-primary/20 resize-none h-20 placeholder:text-outline-variant"
               placeholder="Record your observation..."></textarea>
-            <button
-              id="sendBtn"
+            <button id="sendBtn"
               class="absolute bottom-2 right-2 p-1.5 bg-primary text-on-primary rounded-md flex items-center justify-center hover:opacity-90">
               <span class="material-symbols-outlined text-[18px]">send</span>
             </button>
@@ -214,7 +228,7 @@
     <!-- Metric Bento Grid -->
     <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between aspect-video lg:aspect-auto">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">Temperature</span>
+        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">溫度</span>
         <div class="flex items-baseline gap-2">
           <span id="tempValue" class="text-4xl font-extrabold text-on-background">26.5</span>
           <span class="text-lg font-bold text-primary">°C</span>
@@ -225,7 +239,7 @@
       </div>
 
       <div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">pH Level</span>
+        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">PH值</span>
         <div class="flex items-baseline gap-2">
           <span id="phValue" class="text-4xl font-extrabold text-on-background">6.8</span>
           <span class="text-lg font-bold text-secondary">pH</span>
@@ -236,7 +250,7 @@
       </div>
 
       <div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">Nitrate</span>
+        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant">總溶解固體量</span>
         <div class="flex items-baseline gap-2">
           <span id="nitrateValue" class="text-4xl font-extrabold text-on-background">12</span>
           <span class="text-lg font-bold text-tertiary">ppm</span>
@@ -247,11 +261,11 @@
       </div>
 
       <div class="bg-primary-container p-6 rounded-xl flex flex-col justify-between">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-primary-container">System Health</span>
+        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-primary-container">魚缸狀況</span>
         <div class="flex items-baseline gap-2">
-          <span id="healthStatus" class="text-4xl font-extrabold text-on-primary-container">OPTIMAL</span>
+          <span id="healthStatus" class="text-4xl font-extrabold text-on-primary-container">良好</span>
         </div>
-        <span class="text-[10px] font-bold text-on-primary-container/70 uppercase">Uptime: 432 Days</span>
+        <span class="text-[10px] font-bold text-on-primary-container/70 uppercase">上線時間: 432 年</span>
       </div>
     </div>
   </main>
@@ -292,7 +306,7 @@
           <p class="text-sm text-on-surface leading-snug">${msg.text}</p>
         </div>
       `).join('');
-      
+
       // Auto-scroll to bottom
       messagesList.scrollTop = messagesList.scrollHeight;
     }
@@ -301,18 +315,18 @@
     function sendMessage() {
       const input = document.getElementById('observationInput');
       const text = input.value.trim();
-      
+
       if (text === '') return;
-      
+
       const now = new Date();
       const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-      
+
       messages.push({
         user: "You (Student)",
         time: time,
         text: text
       });
-      
+
       input.value = '';
       renderMessages();
     }
@@ -333,19 +347,19 @@
       const temp = (Math.random() * 2 - 1) + 26.5;
       const ph = (Math.random() * 0.5 - 0.25) + 6.8;
       const nitrate = (Math.random() * 4 - 2) + 12;
-      
+
       document.getElementById('tempValue').textContent = temp.toFixed(1);
       document.getElementById('phValue').textContent = ph.toFixed(1);
       document.getElementById('nitrateValue').textContent = Math.round(nitrate);
-      
+
       const tempPercent = (temp / 30) * 100;
       const phPercent = (ph / 8) * 100;
       const nitratePercent = (nitrate / 30) * 100;
-      
+
       document.getElementById('tempBar').style.width = tempPercent + '%';
       document.getElementById('phBar').style.width = phPercent + '%';
       document.getElementById('nitrateBar').style.width = nitratePercent + '%';
-      
+
       // Random viewer count
       const viewers = Math.floor(Math.random() * 50) + 130;
       document.getElementById('viewerCount').textContent = viewers;
@@ -357,7 +371,7 @@
       }).catch(() => {
         alert('複製失敗，請手動複製');
       });
-}
+    }
 
     // Update metrics every 5 seconds
     setInterval(updateMetrics, 5000);
@@ -368,3 +382,75 @@
 </body>
 
 </html>
+
+
+<script>
+  // 渲染訊息到畫面
+  async function fetchMessages() {
+    try {
+      const response = await fetch("{{ route('messages.get') }}");
+      const messages = await response.json();
+
+      const list = document.getElementById('messagesList');
+      list.innerHTML = messages.map(msg => {
+        const time = new Date(msg.created_at).toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+        // 判斷是否為本人（增加視覺區隔）
+        const isMe = msg.user_name === "{{ session('user_name') }}";
+
+        return `
+                    <div class="p-3 rounded-lg border border-outline-variant/10 ${isMe ? 'bg-teal-50/50' : 'bg-white'} shadow-sm">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs font-bold ${isMe ? 'text-teal-700' : 'text-slate-600'}">${msg.user_name}</span>
+                            <span class="text-[10px] text-outline">${time}</span>
+                        </div>
+                        <p class="text-sm text-on-surface">${msg.content}</p>
+                    </div>
+                `;
+      }).join('');
+
+      // 捲動到最新訊息
+      list.scrollTop = list.scrollHeight;
+    } catch (e) { console.error("抓取失敗", e); }
+  }
+
+  // 傳送訊息到後端
+  async function sendMessage() {
+    const input = document.getElementById('observationInput');
+    const content = input.value.trim();
+    if (!content) return;
+
+    // 檢查是否登入 (非強制，視你的需求而定)
+    if (!"{{ session('user_id') }}") {
+      if (!confirm("您目前以「訪客」身分發言，確定要傳送嗎？")) return;
+    }
+
+    try {
+      const res = await fetch("{{ route('messages.store') }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": "{{ csrf_token() }}" // 重要：防止 419 錯誤
+        },
+        body: JSON.stringify({ content: content })
+      });
+
+      if (res.ok) {
+        input.value = ''; // 清空輸入框
+        fetchMessages(); // 立即重新讀取
+      }
+    } catch (e) { alert("傳送失敗"); }
+  }
+
+  // 綁定事件
+  document.getElementById('sendBtn').addEventListener('click', sendMessage);
+  document.getElementById('observationInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // 啟動自動輪詢 (每 3 秒檢查一次)
+  fetchMessages();
+  setInterval(fetchMessages, 3000);
+</script>

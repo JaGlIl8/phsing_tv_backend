@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Phsing_tv - Sign Up</title>
+  <title>PheeShing.TV - Sign Up</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
@@ -53,7 +53,7 @@
     <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
       <a href="{{ route('home') }}"
         class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300">
-        Phsing_tv
+        PheeShing.TV
       </a>
     </div>
   </header>

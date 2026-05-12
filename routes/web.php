@@ -4,7 +4,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Message;
+use Illuminate\Http\Request;
 
 //login & register
 Route::get('/login', [AuthController::class, 'loginView'])->name('login.view');//get登入
@@ -25,10 +26,35 @@ Route::get('/register', function () {
 Route::get('/stream', function () {
     return view('pages.stream');
 })->name('stream.view');
-
+Route::get('/manage', function () {
+    return view('pages.manage');
+})->name('manage.view');
+Route::get('/admin', function () {
+    return view('pages.admin');
+})->name('admin.view');
+Route::get('/profile', function () {
+    return view('pages.profile');
+})->name('profile.view');
 
 //test page
-route::match(['get', 'post'], '/temp', function () {
+Route::match(['get', 'post'], '/temp', function () {
     return view('pages.temp');
 });
 
+
+// 獲取最新訊息
+Route::get('/api/messages', function () {
+    return Message::orderBy('created_at', 'asc')->take(50)->get();
+})->name('messages.get');
+
+// 儲存新訊息
+Route::post('/api/messages', function (Request $request) {
+    $msg = new Message();
+    // 如果有登入就用 session 的名字，否則用「訪客」
+    $msg->user_name = session('user_name') ?? '訪客';
+    $msg->user_id = session('user_id');
+    $msg->content = $request->content;
+    $msg->save();
+
+    return response()->json(['status' => 'success']);
+})->name('messages.store');
