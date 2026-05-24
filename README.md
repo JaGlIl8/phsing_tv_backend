@@ -1,94 +1,229 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">
+  <a href="https://laravel.com" target="_blank">
+    <img
+      src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg"
+      width="400"
+      alt="Laravel Logo"
+    >
+  </a>
+</p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://github.com/laravel/framework/actions">
+    <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status">
+  </a>
+
+  <a href="https://packagist.org/packages/laravel/framework">
+    <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads">
+  </a>
+
+  <a href="https://packagist.org/packages/laravel/framework">
+    <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version">
+  </a>
+
+  <a href="https://packagist.org/packages/laravel/framework">
+    <img src="https://img.shields.io/packagist/l/laravel/framework" alt="License">
+  </a>
 </p>
 
 ---
 
-## 🚀 專案快速啟動指南 (使用 Laravel Sail & Docker)
+# 🚀 專案快速啟動指南
+## 使用 Laravel Sail + Docker
 
-本專案已封裝好 **PHP 8.4** 與 **PostgreSQL 15** 開發環境，本機無需安裝 PHP、Composer 或資料庫，只需確保電腦已啟動 **Docker Desktop** 即可。
+本專案已封裝：
 
-### 1. 複製環境設定檔
-進入專案根目錄，複製環境範本並建立 `.env`：
+- PHP 8.4
+- PostgreSQL 15
+- Laravel Sail
+- Docker
+
+本機不需額外安裝：
+
+- PHP
+- Composer
+- PostgreSQL
+
+只需先安裝並啟動 Docker Desktop 即可。
+
+---
+
+## 1️⃣ 複製環境設定檔
+
+進入專案根目錄後執行：
+
 ```bash
 cp .env.example .env
+```
 
-2. 初始化並安裝 Composer 套件
+---
 
-若本機沒有 PHP 8.4，請直接執行以下 Docker 臨時指令來下載並安裝專案相依套件（會自動產生 vendor 資料夾）：
-Bash
+## 2️⃣ 安裝 Composer 相依套件
 
+若本機沒有 PHP 8.4，可直接使用 Docker 臨時容器執行 Composer：
+
+```bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
     laravelsail/php84-composer:latest \
     composer install
+```
 
-3. 啟動 Docker 虛擬環境
+執行完成後會自動產生：
 
-在 docker-compose.yml 所在的專案根目錄，執行以下指令啟動（背景執行）：
-Bash
+```text
+vendor/
+```
 
+---
+
+## 3️⃣ 啟動 Docker 開發環境
+
+請於 `docker-compose.yml` 所在目錄執行：
+
+```bash
 ./vendor/bin/sail up -d
+```
 
-    💡 註：你也可以使用傳統的 docker compose up -d，但建議使用 ./vendor/bin/sail 能獲得更完整的 Laravel 整合支援。
+> 💡 建議優先使用 Sail，而非直接使用 `docker compose up -d`
+> 可獲得較完整的 Laravel 整合支援。
 
-4. 產生應用程式密鑰 (APP_KEY)
-Bash
+---
 
+## 4️⃣ 產生 Laravel APP_KEY
+
+```bash
 ./vendor/bin/sail artisan key:generate
+```
 
-5. 建立 PostgreSQL 資料庫結構 (Migration)
+---
 
-本專案使用 PostgreSQL，初次啟動需要讓系統自動建立資料表：
-Bash
+## 5️⃣ 建立 PostgreSQL 資料表
 
+首次啟動請執行 Migration：
+
+```bash
 ./vendor/bin/sail artisan migrate:fresh
+```
 
-    ⚠️ 注意：若過程中提示 messages 資料表重複建立的錯誤，請先手動檢查並刪除重複的 Migration 檔案（例如：database/migrations/2026_05_11_130121_create_messages_table.php），接著再次執行一次 migrate:fresh 即可。
+> ⚠️ 若出現 `messages` 資料表重複建立錯誤：
+>
+> 請檢查並刪除重複 Migration 檔案，例如：
+>
+> ```text
+> database/migrations/2026_05_11_130121_create_messages_table.php
+> ```
+>
+> 刪除後重新執行：
+>
+> ```bash
+> ./vendor/bin/sail artisan migrate:fresh
+> ```
 
-6. 開啟網頁
+---
 
-一切就緒後，打開瀏覽器輸入：
-👉 http://localhost 即可看見專案畫面！
-🛠️ 常用 Sail 指令速查
+## 6️⃣ 開啟專案
 
-為了方便開發，建議在你的 Zsh 或 Bash 設定檔（如 ~/.zshrc）加入別名：alias sail="sh vendor/bin/sail"。
+啟動完成後，瀏覽器開啟：
 
-    關閉環境：./vendor/bin/sail down
+```text
+http://localhost
+```
 
-    執行 Artisan 指令：./vendor/bin/sail artisan [指令]
+即可進入專案畫面。
 
-    安裝前端套件：./vendor/bin/sail npm install
+---
 
-    啟動前端熱重載：./vendor/bin/sail npm run dev
+# 🛠️ 常用 Sail 指令
 
-    進入容器 CLI 終端機：./vendor/bin/sail shell
+建議加入 alias：
 
-About Laravel
+```bash
+alias sail="sh vendor/bin/sail"
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+可加入：
 
-    Simple, fast routing engine.
+- `~/.zshrc`
+- `~/.bashrc`
 
-    Powerful dependency injection container.
+---
 
-    Multiple back-ends for session and cache storage.
+## 常用指令列表
 
-    Expressive, intuitive database ORM.
+### 啟動環境
 
-    Database agnostic schema migrations.
+```bash
+./vendor/bin/sail up -d
+```
 
-    Robust background job processing.
+### 關閉環境
 
-    Real-time event broadcasting.
+```bash
+./vendor/bin/sail down
+```
 
-Learning Laravel
+### 執行 Artisan 指令
 
-Laravel has the most extensive and thorough documentation and video tutorial library of all modern web application frameworks.
+```bash
+./vendor/bin/sail artisan [command]
+```
+
+範例：
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+### 安裝前端套件
+
+```bash
+./vendor/bin/sail npm install
+```
+
+### 啟動 Vite 熱更新
+
+```bash
+./vendor/bin/sail npm run dev
+```
+
+### 進入 Container Shell
+
+```bash
+./vendor/bin/sail shell
+```
+
+---
+
+# 📘 About Laravel
+
+Laravel 是一套具備優雅語法的 Web Application Framework，
+目標是讓開發流程更快速、更直觀、更具可維護性。
+
+Laravel 提供：
+
+- 快速且簡潔的 Routing System
+- 強大的 Dependency Injection Container
+- 多種 Session / Cache Backend
+- Eloquent ORM
+- Database Migration
+- Queue / Job System
+- Event Broadcasting
+- API 與 Middleware 架構
+
+---
+
+# 📚 Learning Laravel
+
+Laravel 擁有完整且成熟的學習資源：
+
+- 官方文件
+- Laracasts 教學影片
+- 社群套件
+- 開源生態系
+
+官方文件：
+
+https://laravel.com/docs
