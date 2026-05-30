@@ -1,329 +1,489 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html class="light" lang="zh-Hant">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>AquaStream | 系統管理中心</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "primary-fixed": "#6af2de",
-                        "error-container": "#fb5151",
-                        "tertiary-container": "#20c0ff",
-                        "on-primary": "#c0fff3",
-                        "surface-dim": "#d0d5d8",
-                        "on-secondary-fixed-variant": "#006765",
-                        "on-error-container": "#570008",
-                        "error-dim": "#9f0519",
-                        "primary-container": "#6af2de",
-                        "inverse-on-surface": "#9a9d9f",
-                        "surface": "#f5f7f9",
-                        "on-surface-variant": "#595c5e",
-                        "secondary-fixed": "#38fbf7",
-                        "on-error": "#ffefee",
-                        "on-primary-fixed": "#00443c",
-                        "primary-fixed-dim": "#5ae4d0",
-                        "tertiary-fixed-dim": "#00b2ee",
-                        "inverse-surface": "#0b0f10",
-                        "secondary-container": "#38fbf7",
-                        "outline": "#747779",
-                        "secondary": "#006765",
-                        "on-primary-container": "#00594f",
-                        "surface-variant": "#d9dde0",
-                        "outline-variant": "#abadaf",
-                        "primary-dim": "#005a50",
-                        "surface-container-low": "#eef1f3",
-                        "on-primary-fixed-variant": "#006359",
-                        "surface-tint": "#00675d",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-dim": "#005958",
-                        "error": "#b31b25",
-                        "surface-bright": "#f5f7f9",
-                        "tertiary": "#006286",
-                        "on-secondary-container": "#005c5a",
-                        "on-secondary-fixed": "#004746",
-                        "tertiary-fixed": "#20c0ff",
-                        "surface-container-high": "#dfe3e6",
-                        "on-secondary": "#bcfffc",
-                        "surface-container": "#e5e9eb",
-                        "on-tertiary": "#e7f5ff",
-                        "on-tertiary-fixed-variant": "#004059",
-                        "on-background": "#2c2f31",
-                        "on-tertiary-fixed": "#001e2b",
-                        "on-tertiary-container": "#00374d",
-                        "background": "#f5f7f9",
-                        "on-surface": "#2c2f31",
-                        "secondary-fixed-dim": "#10ece8",
-                        "inverse-primary": "#6df5e1",
-                        "surface-container-highest": "#d9dde0",
-                        "primary": "#00675d",
-                        "tertiary-dim": "#005675"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.5rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Manrope"],
-                        "display": ["Manrope"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        body {
-            background-color: #f5f7f9;
-            color: #2c2f31;
-            font-family: 'Inter', sans-serif;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: 'Manrope', sans-serif;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>PheeShing.TV | 系統管理</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    // [Consistency] 沿用系統一致的色彩定義
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#00796B",
+            "primary-hover": "#00695C",
+            "surface": "#f8fafc",
+            "surface-container": "#ffffff",
+            "surface-container-low": "#f1f5f9",
+            "outline-variant": "#e2e8f0",
+            "on-surface": "#1e293b",
+            "on-surface-variant": "#64748b",
+            "error": "#ef4444",
+            "success": "#10b981",
+            "warning": "#f59e0b",
+            "info": "#3b82f6"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"],
+            "body": ["Inter", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: theme('colors.surface');
+      color: theme('colors.on-surface');
+      font-family: theme('fontFamily.body');
+    }
+    h1, h2, h3 {
+      font-family: theme('fontFamily.display');
+    }
+    .glass-nav {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+    }
+  </style>
 </head>
 
-<body class="bg-surface text-on-surface">
-    <div class="relative flex h-auto min-h-screen w-full flex-col bg-surface group/design-root overflow-x-hidden">
-        <div class="layout-container flex h-full grow flex-col">
+<body class="min-h-screen flex flex-col pb-16">
+  
+  <!-- [LAYOUT] Top Navigation Area -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-outline-variant shadow-sm">
+    <div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-8">
+        <a href="{{ route('home') }}"
+          class="text-2xl font-extrabold tracking-tighter text-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
+          PheeShing.TV
+        </a>
+        <div class="hidden md:flex items-center gap-2">
+            <span class="bg-error/10 text-error px-2.5 py-1 rounded-md text-[11px] font-extrabold uppercase tracking-widest border border-error/20 flex items-center gap-1 shadow-sm">
+                <span class="material-symbols-outlined text-[14px]">admin_panel_settings</span> SU
+            </span>
+        </div>
+      </div>
 
-            <!-- Shared Header Component: 整合 Session 邏輯 -->
-            <header
-                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-outline-variant/15 bg-surface-container-lowest px-10 py-3 sticky top-0 z-50">
-                <div class="flex items-center gap-4 text-primary">
-                    <div class="size-8">
-                    </div>
-                    <a href="{{ route('home') }}"
-                        class="text-on-surface text-lg font-extrabold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">
-                        AquaStream 系統管理
-                    </a>
-                </div>
+      <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- [Minimal User Effort] Global Search -->
+        <div class="hidden lg:flex w-full max-w-sm relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+            </div>
+            <input class="block w-full pl-10 pr-3 py-2 bg-surface-container border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-on-surface placeholder:text-on-surface-variant/60 text-sm shadow-inner" placeholder="搜尋用戶 ID、實況頻道..." type="text" />
+        </div>
 
-                <div class="flex flex-1 justify-end gap-6 items-center">
-                    <!-- 搜尋框 -->
-                    <label class="flex flex-col min-w-40 h-10 max-w-64">
-                        <div
-                            class="flex w-full flex-1 items-stretch rounded-lg h-full bg-surface-container-low border border-outline-variant/10">
-                            <div class="text-on-surface-variant flex items-center justify-center pl-4 rounded-l-lg">
-                                <span class="material-symbols-outlined text-sm">search</span>
-                            </div>
-                            <input
-                                class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-on-surface placeholder:text-on-surface-variant px-4 text-sm"
-                                placeholder="搜尋..." />
-                        </div>
-                    </label>
+        @if(session('user_id'))
+          <div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+            <div class="flex flex-col items-end">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest">系統總管</span>
+              <span class="text-sm font-bold text-on-surface">{{ session('user_name') }}</span>
+            </div>
+            <img class="w-10 h-10 rounded-full border-2 border-primary object-cover shadow-sm" src="https://i.pravatar.cc/150?img=11" alt="Admin Avatar">
+            <form action="{{ route('logout.submit') }}" method="POST" class="m-0">
+              @csrf
+              <button type="submit" class="flex items-center justify-center rounded-lg w-10 h-10 bg-error/10 text-error hover:bg-error hover:text-white transition-all shadow-sm" title="登出系統">
+                <span class="material-symbols-outlined text-[20px]">logout</span>
+              </button>
+            </form>
+          </div>
+        @else
+          <!-- Fallback Demo User -->
+          <div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+            <div class="flex flex-col items-end">
+              <span class="text-[10px] font-bold text-primary uppercase tracking-widest">系統總管</span>
+              <span class="text-sm font-bold text-on-surface">馬一隆</span>
+            </div>
+            <div class="w-10 h-10 rounded-full border-2 border-primary bg-primary-hover text-white flex items-center justify-center font-bold shadow-sm">R</div>
+          </div>
+        @endif
+      </div>
+    </div>
+  </header>
 
-                    @if(session('user_id'))
-                        <!-- 已登入狀態：顯示用戶與登出 -->
-                        <div class="flex items-center gap-4 border-l border-outline-variant/20 pl-6">
-                            <div class="flex flex-col items-end">
-                                <span class="text-xs font-bold text-primary uppercase tracking-tighter">Administrator</span>
-                                <span class="text-sm font-bold text-on-surface">{{ session('user_name') }}</span>
-                            </div>
-
-                            <form action="{{ route('logout.submit') }}" method="POST" class="m-0">
-                                @csrf
-                                <button type="submit"
-                                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-error/10 text-error hover:bg-error hover:text-white transition-all shadow-sm">
-                                    <span class="material-symbols-outlined">logout</span>
-                                </button>
-                            </form>
-
-                            <!-- 頭像 -->
-                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary-fixed"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAb-wiQKM6QuQm_busFeuMBOOfTWS_lSchPHH3wOiANd3glDPzwhstWjeTM76EpPRrZYYCvj50nujUVHRrmeUrOgIOl0AwoVgb_JBG2Svvta2zMSc_n_tYzbPRQ9Dbx5O5XGil0lU8GP74r-fXzJy_3MUor8HcN-ZEnaXmgHEDy8MrijuXVgsDHeohH07qyjL4ce5vadR4pgGJs0AhwR7e4hGaT1ZdbWJEaFAOVq_sy7Jo2Xn24AMz_pu0ixwIzoCD4_TK9nhu1Frnt");'>
-                            </div>
-                        </div>
-                    @else
-                        <!-- 未登入狀態 -->
-                        <a href="{{ route('login.view') }}"
-                            class="bg-primary text-on-primary px-6 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-primary-dim transition-all">
-                            管理員登入
-                        </a>
-                    @endif
-                </div>
-            </header>
-
-            <main class="flex-1 px-40 py-10 max-w-[1440px] mx-auto w-full">
-                <!-- Hero Title -->
-                <div class="flex flex-col gap-2 mb-10">
-                    <span class="text-primary font-bold tracking-[0.05em] uppercase text-xs font-label">Administrative
-                        Overview</span>
-                    <h1 class="text-on-surface text-4xl font-black leading-tight tracking-[-0.033em]">
-                        <strong>系統管理</strong>
-                    </h1>
-                    <p class="text-on-surface-variant text-base font-normal max-w-2xl">歡迎回來，在此管理使用者權限、監控即時水族箱狀況與報告。</p>
-                </div>
-
-                <!-- Section 1: User Account Management -->
-                <section class="mb-12">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-on-surface text-2xl font-bold tracking-tight">用戶帳號管理</h2>
-                        <button
-                            class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-primary-dim transition-colors">新增用戶</button>
-                    </div>
-                    <div
-                        class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,103,93,0.05)] border border-outline-variant/10">
-                        <table class="w-full text-left">
-                            <thead class="bg-surface-container-low">
-                                <tr>
-                                    <th
-                                        class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                                        用戶 ID</th>
-                                    <th
-                                        class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                                        姓名</th>
-                                    <th
-                                        class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                                        角色</th>
-                                    <th
-                                        class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                                        狀態</th>
-                                    <th
-                                        class="px-6 py-4 text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                                        操作</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-outline-variant/10">
-                                <tr class="hover:bg-surface-container-low/50 transition-colors">
-                                    <td class="px-6 py-5 text-sm font-medium text-primary">#STU-9402</td>
-                                    <td class="px-6 py-5 text-sm font-semibold text-on-surface">張小明</td>
-                                    <td class="px-6 py-5"><span
-                                            class="px-3 py-1 text-xs font-bold rounded-full bg-primary-container text-on-primary-container">管理員</span>
-                                    </td>
-                                    <td class="px-6 py-5">
-                                        <div class="flex items-center gap-2 text-sm text-on-surface"><span
-                                                class="size-2 rounded-full bg-emerald-500"></span> 啟用中</div>
-                                    </td>
-                                    <td class="px-6 py-5 text-on-surface-variant cursor-pointer"><span
-                                            class="material-symbols-outlined text-lg">more_vert</span></td>
-                                </tr>
-                                <!-- 其他行... -->
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- Section 2: Aquarium Inventory List -->
-                <section class="mb-12">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-on-surface text-2xl font-bold tracking-tight">水族箱庫存清單</h2>
-                        <div class="flex gap-4">
-                            <span
-                                class="flex items-center gap-2 text-sm font-medium text-on-surface-variant cursor-pointer hover:text-primary">
-                                <span class="material-symbols-outlined text-sm">filter_list</span> 篩選條件
-                            </span>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Tank Card 1 -->
-                        <div
-                            class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,103,93,0.03)] border border-outline-variant/10 group hover:border-primary/30 transition-all">
-                            <div class="h-40 bg-cover bg-center"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5Pl1Z2ws_BkGX8zy1gymkPV2MZbCaX95gWpaefA6AntDzDukXZ1ciGUZOnM-X9kSzxbtl_Q8ELqkzoE2kblb8ts1TMmiUHDW0hgIrKPm6DTmHYNORXaauNnzhie4lvm3keEw-x1USGGHWIgALUVlOsAGBBbdcIRfa9NRn5ZHfWnwUNIXbnabenjJ1fWA2RCDiIkGjXSdHwWm38sTMuhzHOLJALIR-p-8SgOyKkYRuUk95ikEVmmQjXjL4PSroSB5Kq0r4VXfHeyr8");'>
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h3 class="text-lg font-bold text-on-surface">亞馬遜流域</h3>
-                                    <span
-                                        class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-tertiary-container text-on-tertiary-container">熱帶</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-4">
-                                    <div class="flex items-center gap-1 text-primary">
-                                        <span class="material-symbols-outlined text-base">visibility</span>
-                                        <span class="text-sm font-bold">12,402</span>
-                                    </div>
-                                    <button
-                                        class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">查看詳情
-                                        <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 卡片 2 & 3 略... -->
-                    </div>
-                </section>
-
-                <!-- Section 3: Revenue Reports -->
-                <section class="mb-12">
-                    <div class="mb-6">
-                        <h2 class="text-on-surface text-2xl font-bold tracking-tight">營收數據報告</h2>
-                        <p class="text-on-surface-variant text-sm">基於遊客捐贈與互動餵食數據的公式化統計</p>
-                    </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 space-y-4">
-                            <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10">
-                                <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold text-on-surface">水族箱個別營收細目</h3>
-                                    <span class="text-xs text-on-surface-variant">2026年 5月</span>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="p-4 rounded-lg bg-surface-container-low/40">
-                                        <div class="flex justify-between mb-2">
-                                            <span class="font-semibold text-on-surface">亞馬遜流域</span>
-                                            <span class="font-bold text-primary">$15,450 TWD</span>
-                                        </div>
-                                        <div
-                                            class="flex items-center gap-2 text-[11px] font-mono text-on-surface-variant">
-                                            <span class="bg-surface-container-high px-2 py-0.5 rounded">基礎捐贈:
-                                                $10,000</span>
-                                            <span>+</span>
-                                            <span class="bg-surface-container-high px-2 py-0.5 rounded">互動乘數:
-                                                1.5x</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col gap-6">
-                            <div class="bg-primary p-8 rounded-xl text-on-primary shadow-lg shadow-primary/20">
-                                <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Consolidated
-                                    Total Revenue</p>
-                                <h2 class="text-4xl font-black mb-1">$48,250</h2>
-                                <p class="text-sm opacity-90">本月合併總營收 (TWD)</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <footer class="border-t border-outline-variant/10 bg-surface-container-low px-40 py-8 text-center">
-                <div class="flex flex-col items-center gap-4">
-                    <div class="flex items-center gap-2 text-primary/60">
-                        <svg class="size-5" fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z">
-                            </path>
-                        </svg>
-                        <span class="text-sm font-bold tracking-widest uppercase">AquaStream Admin</span>
-                    </div>
-                    <p class="text-xs text-on-surface-variant">© 2026 AquaStream 海洋研究中心. 僅供學術管理用途使用。</p>
-                </div>
-            </footer>
+  <!-- [LAYOUT] Main Content Area -->
+  <main class="flex-grow w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-8">
+    
+    <!-- Hero Title -->
+    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+            <h1 class="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-on-surface mb-2">系統管理</h1>
+            <p class="text-on-surface-variant text-sm md:text-base">監控全站實況健康度、管理使用者並檢視財務流動。</p>
+        </div>
+        <div class="flex gap-3">
+            <button class="bg-surface-container text-on-surface border border-outline-variant px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">download</span> 匯出報表
+            </button>
         </div>
     </div>
-</body>
 
+    <!-- [Aesthetics] Top KPI Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant shadow-sm flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="material-symbols-outlined text-primary bg-teal-50 p-2 rounded-lg">group</span>
+                <span class="text-xs font-bold text-success bg-success/10 px-2 py-0.5 rounded flex items-center">+12%</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">總註冊使用者</p>
+                <h3 class="text-3xl font-extrabold text-on-surface">14,208</h3>
+            </div>
+        </div>
+        
+        <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant shadow-sm flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="material-symbols-outlined text-error bg-error/10 p-2 rounded-lg">live_tv</span>
+                <span class="text-xs font-bold text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded flex items-center">即時</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">線上實況台</p>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-3xl font-extrabold text-on-surface">24</h3>
+                    <span class="text-sm font-medium text-on-surface-variant">/ 350 總頻道</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant shadow-sm flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="material-symbols-outlined text-warning bg-warning/10 p-2 rounded-lg">payments</span>
+                <span class="text-xs font-bold text-success bg-success/10 px-2 py-0.5 rounded flex items-center">+8.5%</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">本月斗內總額</p>
+                <h3 class="text-3xl font-extrabold text-on-surface">$128.5K</h3>
+            </div>
+        </div>
+
+        <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant shadow-sm flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 opacity-5">
+                <span class="material-symbols-outlined text-[100px]">dns</span>
+            </div>
+            <div class="flex justify-between items-start mb-4 relative z-10">
+                <span class="material-symbols-outlined text-info bg-info/10 p-2 rounded-lg">storage</span>
+                <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
+                </span>
+            </div>
+            <div class="relative z-10">
+                <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">系統負載狀態</p>
+                <h3 class="text-xl font-extrabold text-success">游刃有餘 (32%)</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Middle Section: Active Live Streams Monitor -->
+    <section class="mb-10">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-on-surface text-xl font-bold tracking-tight flex items-center gap-2">
+                <span class="material-symbols-outlined text-error">visibility</span> 即時實況監控
+            </h2>
+            <a href="#" class="text-sm font-bold text-primary hover:underline">查看所有 (24)</a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Stream Monitor Card 1 -->
+            <div class="bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-black">
+                    <img class="w-full h-full object-cover opacity-80" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY5TOWcZpTeh4EiD_qPTfhUVd_oZA-LV3AuQ&s" alt="Stream">
+                    <div class="absolute top-3 left-3 flex gap-2">
+                        <span class="bg-error text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1 shadow-sm">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> LIVE
+                        </span>
+                        <span class="bg-black/60 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded flex items-center gap-1 shadow-sm">
+                            <span class="material-symbols-outlined text-[12px]">person</span> 2,108
+                        </span>
+                    </div>
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-on-surface line-clamp-1">皮老闆的日常</h3>
+                        </div>
+                        <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">videocam</span> 海之霸 (UID: 9402)
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-outline-variant/50 flex gap-2">
+                        <button class="flex-1 bg-surface-container-low text-on-surface border border-outline-variant hover:bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">進入房間</button>
+                        <button class="bg-error/10 text-error hover:bg-error hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" title="強制關閉實況">中斷</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stream Monitor Card 2 -->
+            <div class="bg-surface-container border border-outline-variant rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-black">
+                    <img class="w-full h-full object-cover opacity-80" src="https://images.unsplash.com/photo-1524704796725-9fc3044a58b2?q=80&w=600&auto=format&fit=crop" alt="Stream">
+                    <div class="absolute top-3 left-3 flex gap-2">
+                        <span class="bg-error text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1 shadow-sm">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> LIVE
+                        </span>
+                        <span class="bg-black/60 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded flex items-center gap-1 shadow-sm">
+                            <span class="material-symbols-outlined text-[12px]">person</span> 856
+                        </span>
+                    </div>
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-on-surface line-clamp-1">海底樹屋的生態</h3>
+                        </div>
+                        <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">videocam</span> 珊迪 (UID: 8123)
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-outline-variant/50 flex gap-2">
+                        <button class="flex-1 bg-surface-container-low text-on-surface border border-outline-variant hover:bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">進入房間</button>
+                        <button class="bg-error/10 text-error hover:bg-error hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" title="強制關閉實況">中斷</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stream Monitor Card 3 (Warning State) -->
+            <div class="bg-surface-container border-2 border-warning/50 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+                <div class="relative aspect-video bg-black">
+                    <img class="w-full h-full object-cover opacity-80 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoGlrDy6esWksI7SQ4KN76WzRplQ34ABWngzy3oiQxkVvwX7F350WDphbLJOvf9zJK8fLUZXrU1HtW2GfOmhaeSiEcCoqJ0BwuqCsvE6Bn9CSjdAn8xLkH-mXA8eHGKPE46tQOsoIx3ACp29mfBADrxLkhLwTGetnzUw9gHe7gRDN_StzjhrGszF4yFU7QtaBKW7Y55vNUa0PqE8AFjABgwux0JwNtr0HQsdvXbLwEA3l1R4Y2H9xydq5BJ8xocm3CBOZLWf7gGODC" alt="Stream">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="bg-warning text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
+                            <span class="material-symbols-outlined text-[16px]">warning</span> 訊號不穩
+                        </span>
+                    </div>
+                    <div class="absolute top-3 left-3 flex gap-2">
+                        <span class="bg-warning text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase flex items-center gap-1 shadow-sm">重新連線中</span>
+                    </div>
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-on-surface line-clamp-1">亞洲統神</h3>
+                        </div>
+                        <p class="text-xs text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">videocam</span> 亞洲統神 (UID: 0001)
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-warning/30 flex gap-2">
+                        <button class="flex-1 bg-warning/10 text-warning border border-warning/20 hover:bg-warning hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">重新連線中</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Section: Users & Revenue split -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- [Content Awareness] User Management Table -->
+        <section class="lg:col-span-2">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-on-surface text-xl font-bold tracking-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">manage_accounts</span> 使用者管理
+                </h2>
+                <button class="bg-primary text-white px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm hover:bg-primary-hover transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">add</span> 新增
+                </button>
+            </div>
+            
+            <div class="bg-surface-container rounded-2xl overflow-hidden shadow-sm border border-outline-variant">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-outline-variant">
+                            <tr>
+                                <th class="px-5 py-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">UID / 帳號</th>
+                                <th class="px-5 py-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">身份權限</th>
+                                <th class="px-5 py-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">頻道狀態</th>
+                                <th class="px-5 py-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider text-right">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/50 bg-white">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-5 py-3.5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-xs shadow-sm">海</div>
+                                        <div>
+                                            <p class="text-sm font-bold text-on-surface">海之霸</p>
+                                            <p class="text-[10px] text-on-surface-variant font-mono">UID: 9402</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="px-2.5 py-1 text-[10px] font-bold rounded-md bg-primary/10 text-primary border border-primary/20">實況主</span>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="flex items-center gap-1.5 text-xs text-on-surface">
+                                        <span class="w-2 h-2 rounded-full bg-success"></span> 正常開播
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors rounded-md hover:bg-slate-100" title="編輯"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="p-1.5 text-slate-400 hover:text-error transition-colors rounded-md hover:bg-slate-100" title="停權"><span class="material-symbols-outlined text-[18px]">block</span></button>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-5 py-3.5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs shadow-sm">王</div>
+                                        <div>
+                                            <p class="text-sm font-bold text-on-surface">王小明</p>
+                                            <p class="text-[10px] text-on-surface-variant font-mono">UID: 1205</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="px-2.5 py-1 text-[10px] font-bold rounded-md bg-slate-100 text-slate-600 border border-slate-200">一般使用者</span>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="flex items-center gap-1.5 text-xs text-on-surface">
+                                        <span class="w-2 h-2 rounded-full bg-success"></span> 正常
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors rounded-md hover:bg-slate-100"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+                                    <button class="p-1.5 text-slate-400 hover:text-error transition-colors rounded-md hover:bg-slate-100"><span class="material-symbols-outlined text-[18px]">block</span></button>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50 transition-colors opacity-60 bg-slate-50/50">
+                                <td class="px-5 py-3.5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-error/10 text-error flex items-center justify-center font-bold text-xs shadow-sm">L</div>
+                                        <div>
+                                            <p class="text-sm font-bold text-on-surface line-through">LNG</p>
+                                            <p class="text-[10px] text-on-surface-variant font-mono">UID: 6666</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="px-2.5 py-1 text-[10px] font-bold rounded-md bg-slate-100 text-slate-600 border border-slate-200">一般使用者</span>
+                                </td>
+                                <td class="px-5 py-3.5">
+                                    <span class="flex items-center gap-1.5 text-xs text-error font-bold">
+                                        <span class="w-2 h-2 rounded-full bg-error"></span> 永久停權
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="p-1.5 text-slate-400 hover:text-success transition-colors rounded-md hover:bg-slate-100" title="解除停權"><span class="material-symbols-outlined text-[18px]">lock_open</span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 bg-slate-50 border-t border-outline-variant text-center">
+                    <a href="#" class="text-xs font-bold text-primary hover:underline">檢視全部用戶清單</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Revenue / Donate Overview -->
+        <section class="lg:col-span-1">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-on-surface text-xl font-bold tracking-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-warning">account_balance</span> 全站營收概況
+                </h2>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <!-- Total Revenue Card -->
+                <div class="bg-primary p-6 rounded-2xl text-white shadow-md relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 opacity-10">
+                        <span class="material-symbols-outlined text-[140px]">savings</span>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-primary-fixed-dim mb-1">本月系統總收益 (TWD)</p>
+                        <h2 class="text-4xl font-black font-display drop-shadow-md mb-4">$128,500</h2>
+                        
+                        <div class="flex gap-4 border-t border-white/20 pt-4">
+                            <div>
+                                <p class="text-[10px] text-primary-fixed-dim font-medium">手續費抽成</p>
+                                <p class="font-bold text-sm">$25,700</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-primary-fixed-dim font-medium">實況主分潤</p>
+                                <p class="font-bold text-sm">$102,800</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Donated Channels -->
+                <div class="bg-surface-container rounded-2xl border border-outline-variant shadow-sm p-5">
+                    <h3 class="font-bold text-sm text-on-surface mb-3 flex justify-between">
+                        本週熱門斗內排行 <span class="text-xs text-primary cursor-pointer">完整報表</span>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-2.5 bg-white rounded-lg border border-outline-variant/50">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-black text-amber-500 w-4">1</span>
+                                <span class="text-xs font-bold text-on-surface">亞洲統神</span>
+                            </div>
+                            <span class="text-xs font-bold text-primary">$45,200</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-white rounded-lg border border-outline-variant/50">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-black text-slate-400 w-4">2</span>
+                                <span class="text-xs font-bold text-on-surface">海之霸</span>
+                            </div>
+                            <span class="text-xs font-bold text-primary">$31,850</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-white rounded-lg border border-outline-variant/50">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-black text-amber-700 w-4">3</span>
+                                <span class="text-xs font-bold text-on-surface">蟹堡王</span>
+                            </div>
+                            <span class="text-xs font-bold text-primary">$18,400</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+  </main>
+
+  <!-- [LAYOUT] Bottom Status Bar (維持與全站一致) -->
+  <footer class="fixed bottom-0 w-full bg-white border-t border-outline-variant px-6 py-2 flex justify-between items-center z-40 text-xs font-medium text-on-surface-variant shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+      <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1.5">
+              <span class="flex h-2.5 w-2.5 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+              </span>
+              <span>系統狀態: 正常連線中</span>
+          </div>
+          <span class="hidden sm:inline border-l border-outline-variant pl-4">線上使用者: 306 位</span>
+      </div>
+      <div class="flex gap-4">
+          <a href="#" class="hover:text-primary transition-colors">關於我們</a>
+          <a href="#" class="hover:text-primary transition-colors">服務條款</a>
+      </div>
+  </footer>
+
+  <script>
+    // ----- System Clock -----
+    function updateClock() {
+        const now = new Date();
+        const clockElem = document.getElementById('systemClock');
+        if(clockElem) {
+            clockElem.textContent = now.toLocaleTimeString('zh-TW', { hour12: false });
+        }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
 </html>
