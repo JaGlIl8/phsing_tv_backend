@@ -1,80 +1,103 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="light" lang="zh-Hant">
 
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>PheeShing.TV - Sign Up</title>
+  <title>PheeShing.TV | 註冊</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=Inter:wght@400;500;600&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
   <script id="tailwind-config">
+    // [Consistency] 沿用系統一致的色彩定義
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary": "#00675d",
-            "primary-dim": "#005a50",
-            "on-primary": "#c0fff3",
-            "primary-container": "#6af2de",
-            "surface-container-lowest": "#ffffff",
-            "on-surface": "#2c2f31",
-            "on-surface-variant": "#595c5e",
-            "outline-variant": "#abadaf",
-            "outline": "#747779",
-            "background": "#f5f7f9",
+            "primary": "#00796B",
+            "primary-hover": "#00695C",
+            "surface": "#f8fafc",
+            "surface-container": "#ffffff",
+            "outline-variant": "#e2e8f0",
+            "on-surface": "#1e293b",
+            "on-surface-variant": "#64748b",
+            "error": "#ef4444",
           },
-          fontFamily: { "headline": ["Manrope"], "body": ["Inter"] },
-          borderRadius: { "lg": "0.5rem" },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"],
+            "body": ["Inter", "sans-serif"]
+          },
         },
       },
     }
   </script>
   <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
     body {
-      font-family: 'Inter', sans-serif;
+      background-color: theme('colors.surface');
+      color: theme('colors.on-surface');
+      font-family: theme('fontFamily.body');
     }
-
-    h1 {
-      font-family: 'Manrope', sans-serif;
+    h1, h2, h3 {
+      font-family: theme('fontFamily.display');
     }
-
-    #submit-btn {
-      transition: all 0.2s ease;
-      position: relative;
+    .glass-nav {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
     }
   </style>
 </head>
 
-<body class="bg-background min-h-screen flex flex-col">
-  <header class="bg-white border-b border-slate-100 sticky top-0 z-50">
+<body class="min-h-screen flex flex-col pb-12">
+  
+  <!-- [LAYOUT] Top Navigation Area -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-outline-variant shadow-sm">
     <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
-      <a href="{{ route('home') }}"
-        class="text-2xl font-bold tracking-tighter text-teal-700 hover:text-blue-600 transition-all duration-300">
-        PheeShing.TV
-      </a>
+      <div class="flex items-center gap-8">
+        <a href="{{ route('home') }}"
+          class="text-2xl font-extrabold tracking-tighter text-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
+          PheeShing.TV
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="{{ route('home') }}"
+          class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-[18px]">home</span> 回首頁
+        </a>
+      </div>
     </div>
   </header>
 
+  <!-- [LAYOUT] Middle Content Area -->
   <main class="flex-grow flex items-center justify-center px-4 py-12">
     <div class="w-full max-w-[420px]">
+      
+      <!-- [Aesthetics] Hero Branding -->
       <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-container mb-4">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-50 mb-4 shadow-sm border border-teal-100">
           <span class="material-symbols-outlined text-primary text-3xl">person_add</span>
         </div>
-        <p class="text-on-surface-variant font-medium text-sm uppercase tracking-wider mb-1">Join the Project</p>
-        <h1 class="text-3xl font-bold text-on-surface">Create Account</h1>
+        <p class="text-on-surface-variant text-sm font-bold tracking-widest uppercase mb-2">加入我們</p>
+        <h1 class="text-3xl font-extrabold text-on-surface tracking-tight">看魚或是直播你的魚！</h1>
       </div>
 
-      <div
-        class="bg-surface-container-lowest p-8 rounded-lg shadow-sm border border-outline-variant/15 relative overflow-hidden"
-        id="form-container">
+      <!-- Register Card -->
+      <div class="bg-surface-container p-8 rounded-2xl shadow-sm border border-outline-variant relative z-10">
+        
+        <!-- Error & Success Messages -->
         @if ($errors->any())
-          <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
-            <p class="font-bold">註冊失敗：</p>
-            <ul class="list-disc pl-5 text-sm">
+          <div class="mb-5 p-4 bg-red-50/80 border border-red-200 rounded-xl text-red-700">
+            <p class="font-bold text-sm flex items-center gap-1 mb-1">
+                <span class="material-symbols-outlined text-[18px]">error</span> 註冊失敗：
+            </p>
+            <ul class="list-disc pl-6 text-xs space-y-1">
               @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
               @endforeach
@@ -83,127 +106,157 @@
         @endif
 
         @if (session('success'))
-          <div class="mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700">
+          <div class="mb-5 p-4 bg-green-50/80 border border-green-200 rounded-xl text-green-700 font-medium text-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-[20px]">check_circle</span>
             {{ session('success') }}
           </div>
         @endif
+
         <form action="{{ route('register.submit') }}" method="POST" class="space-y-5" id="register-form">
           @csrf
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-on-surface" for="username">Username</label>
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 pl-3 flex items-center text-outline material-symbols-outlined">person</span>
+          
+          <!-- Username Field -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-bold text-on-surface" for="username">使用者名稱</label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant text-[20px] group-focus-within:text-primary transition-colors">person</span>
+              </div>
               <input
-                class="block w-full pl-10 pr-3 py-3 border border-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                id="username" name="username" placeholder="Choose a username" type="text" required />
+                class="block w-full pl-11 pr-4 py-3 bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-on-surface placeholder:text-on-surface-variant/50 text-sm"
+                id="username" name="username" placeholder="建立您的帳號" type="text" required />
             </div>
           </div>
 
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-on-surface" for="password">Password</label>
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 pl-3 flex items-center text-outline material-symbols-outlined">lock</span>
+          <!-- Password Field -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-bold text-on-surface" for="password">密碼</label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant text-[20px] group-focus-within:text-primary transition-colors">lock</span>
+              </div>
               <input
-                class="block w-full pl-10 pr-3 py-3 border border-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                id="password" name="password" placeholder="Create a password" type="password" required />
+                class="block w-full pl-11 pr-4 py-3 bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-on-surface placeholder:text-on-surface-variant/50 text-sm"
+                id="password" name="password" placeholder="建立您的密碼" type="password" required />
             </div>
           </div>
 
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-on-surface" for="password_confirmation">Confirm
-              Password</label>
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 pl-3 flex items-center text-outline material-symbols-outlined">verified_user</span>
+          <!-- Confirm Password Field -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-bold text-on-surface" for="password_confirmation">確認密碼</label>
+            <div class="relative group">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant text-[20px] group-focus-within:text-primary transition-colors">verified_user</span>
+              </div>
               <input
-                class="block w-full pl-10 pr-3 py-3 border border-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                id="password_confirmation" name="password_confirmation" placeholder="Repeat password" type="password"
-                required />
+                class="block w-full pl-11 pr-4 py-3 bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-on-surface placeholder:text-on-surface-variant/50 text-sm"
+                id="password_confirmation" name="password_confirmation" placeholder="請再次輸入密碼" type="password" required />
             </div>
           </div>
 
-          <div class="pt-4 min-h-[60px] relative">
-            <button id="submit-btn" type="submit"
-              class="w-full bg-primary text-on-primary font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-primary-dim flex items-center justify-center gap-2">
-              Create Account
-              <span class="material-symbols-outlined text-lg">app_registration</span>
+          <!-- [User Experience] Parkour Button Container -->
+          <div id="button-container" class="relative w-full h-20 mt-4 rounded-xl border border-dashed border-outline-variant bg-surface flex items-center justify-center overflow-hidden">
+            
+            <!-- [Content Awareness] Hint -->
+            <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-on-surface-variant/60 select-none pointer-events-none">
+                請將資料先填寫完整！
+            </div>
+
+            <button id="submit-btn"
+              class="absolute w-full h-full bg-primary text-white font-bold rounded-xl shadow-sm hover:bg-primary-hover transition-all duration-300 ease-out active:scale-[0.98] flex items-center justify-center gap-2 z-10"
+              type="submit">
+              立即註冊
+              <span class="material-symbols-outlined text-[20px]">app_registration</span>
             </button>
           </div>
         </form>
 
-        <div class="relative my-8">
+        <!-- Divider -->
+        <div class="relative my-6">
           <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-outline-variant/15"></div>
+            <div class="w-full border-t border-outline-variant"></div>
           </div>
           <div class="relative flex justify-center text-xs">
-            <span class="px-2 bg-surface-container-lowest text-outline italic">Student Data Portal</span>
+            <span class="px-3 bg-surface-container text-on-surface-variant font-medium">或</span>
           </div>
         </div>
 
-        <p class="text-center text-sm text-on-surface-variant">
-          Already have an account?
-          <a class="text-primary font-bold hover:underline ml-1" href="{{ route('login.view') }}">Log in</a>
+        <!-- Login Option -->
+        <p class="text-center text-sm font-medium text-on-surface-variant">
+          已經有帳號了嗎？
+          <a class="text-primary font-bold hover:underline ml-1" href="{{ route('login.view') }}">立即登入</a>
         </p>
       </div>
     </div>
   </main>
 
-  <footer
-    class="bg-slate-50 border-t border-slate-200 mt-auto py-8 text-center text-xs text-slate-500 uppercase tracking-widest">
-    © 2026 AquaStream Student Project
+  <!-- [LAYOUT] Bottom Status Bar -->
+  <footer class="fixed bottom-0 w-full bg-white border-t border-outline-variant px-6 py-2 flex justify-between items-center z-40 text-xs font-medium text-on-surface-variant shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+      <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1.5">
+              <span class="flex h-2.5 w-2.5 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+              </span>
+              <span>系統狀態: 正常連線中</span>
+          </div>
+          <span class="hidden sm:inline border-l border-outline-variant pl-4">線上使用者: 306 位</span>
+      </div>
+      <div class="flex gap-4">
+          <a href="#" class="hover:text-primary transition-colors">關於我們</a>
+          <a href="#" class="hover:text-primary transition-colors">服務條款</a>
+      </div>
   </footer>
 
   <script>
     const btn = document.getElementById('submit-btn');
     const inputs = document.querySelectorAll('input[required]');
-    const form = document.getElementById('register-form');
-    const container = document.getElementById('form-container');
+    const container = document.getElementById('button-container');
 
     const checkForm = () => {
       let allFilled = true;
-      inputs.forEach(input => { if (input.value.trim() === '') allFilled = false; });
+      inputs.forEach(input => { 
+          if (input.value.trim() === '') allFilled = false; 
+      });
       return allFilled;
     };
 
     btn.addEventListener('mouseenter', () => {
       if (!checkForm()) {
-        // 計算可移動範圍 (限制在卡片內)
-        const maxX = container.clientWidth - btn.offsetWidth - 40;
-        const maxY = container.clientHeight - btn.offsetHeight - 100;
+        // 在按鈕專屬容器內跑酷，不會擋到輸入框
+        btn.style.width = '100px';
+        btn.style.height = '40px';
+        
+        const maxX = container.clientWidth - 100;
+        const maxY = container.clientHeight - 40;
 
-        const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-        const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
 
-        btn.style.position = 'absolute';
-        btn.style.zIndex = '50';
         btn.style.left = `${randomX}px`;
         btn.style.top = `${randomY}px`;
-        btn.style.width = '200px'; // 逃跑時變小一點比較好玩
+        
+        // 變色與換圖示，增加逃跑趣味性
+        btn.style.backgroundColor = '#ef4444'; 
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">directions_run</span>';
       }
     });
 
+    const resetFormState = () => {
+      if (checkForm()) {
+        btn.style.width = '100%';
+        btn.style.height = '100%';
+        btn.style.left = '0';
+        btn.style.top = '0';
+        btn.style.backgroundColor = '#00796B';
+        btn.innerHTML = '立即註冊 <span class="material-symbols-outlined text-[20px]">app_registration</span>';
+      }
+    };
+
     inputs.forEach(input => {
-      input.addEventListener('input', () => {
-        if (checkForm()) {
-          btn.style.position = 'static';
-          btn.style.width = '100%';
-          btn.style.left = 'auto';
-          btn.style.top = 'auto';
-        }
-      });
+      input.addEventListener('input', resetFormState);
+      input.addEventListener('change', resetFormState);
     });
   </script>
 </body>
-
 </html>
-@if ($errors->any())
-  <div class="bg-red-100 text-red-700 p-4 rounded mb-6">
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-@endif
