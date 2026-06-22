@@ -2,7 +2,7 @@ name: Build and Push to Docker Hub
 
 on:
   push:
-    branches: [main]
+    branches: [cicd]
 
 env:
   IMAGE_NAME: wotanday/laravel-app # TODO: 改成你的 Docker Hub 用户名
