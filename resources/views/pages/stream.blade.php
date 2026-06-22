@@ -90,11 +90,101 @@
       background-color: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
     }
+
+    body {
+      font-family: -apple-system, "Noto Sans TC", sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      padding: 40px 48px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      /* 邊框已移除，僅保留陰影 */
+    }
+
+    .toggle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-row .row-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+      white-space: nowrap;
+    }
+
+    .toggle-container {
+      cursor: pointer;
+      display: inline-block;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .toggle-track {
+      width: 56px;
+      height: 30px;
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+      position: relative;
+      transition: background-color 0.3s ease;
+      padding: 3px;
+      box-sizing: border-box;
+    }
+
+    .toggle-container.active .toggle-track {
+      background-color: #0d9488;
+    }
+
+    .toggle-knob {
+      width: 24px;
+      height: 24px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-container.active .toggle-knob {
+      transform: translateX(26px);
+    }
+
+    .toggle-container:focus-visible .toggle-track {
+      outline: 2px solid #0d9488;
+      outline-offset: 2px;
+    }
+
+    .status-label {
+      text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+      color: #94a3b8;
+      transition: color 0.3s ease;
+    }
+
+    .status-label.on {
+      color: #0d9488;
+    }
   </style>
 </head>
 
 <body class="bg-surface text-on-background min-h-screen flex flex-col pb-10">
-  
+
   <!-- [LAYOUT] Top Navigation Area -->
   <header class="sticky top-0 z-50 glass-nav border-b border-outline-variant/30 shadow-sm">
     <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
@@ -109,7 +199,8 @@
         </nav>
       </div>
       @if(session('user_id'))
-        <div class="flex items-center gap-4 bg-surface-container-highest px-4 py-2.5 rounded-lg border border-outline-variant/30">
+        <div
+          class="flex items-center gap-4 bg-surface-container-highest px-4 py-2.5 rounded-lg border border-outline-variant/30">
           <div class="flex items-center gap-2 flex-1">
             <span class="material-symbols-outlined text-on-surface-variant text-[20px]">account_circle</span>
             <span class="text-on-surface font-medium text-sm">嗨, {{session('user_name')}}</span>
@@ -135,10 +226,10 @@
   <!-- [LAYOUT] Middle Content Area -->
   <main class="flex-grow max-w-7xl mx-auto w-full p-6 lg:p-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
+
       <!-- Video & Info Player -->
       <div class="lg:col-span-8 flex flex-col gap-6">
-        
+
         <!-- Video Section -->
         <div class="relative aspect-video bg-inverse-surface rounded-xl overflow-hidden shadow-sm group">
           <video id="videoPlayer" class="w-full h-full object-cover bg-black" controls>
@@ -152,8 +243,10 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
             </span>
-            <span class="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider shadow-sm">Live</span>
-            <span class="bg-black/60 backdrop-blur-md text-white text-xs font-medium px-2 py-1 rounded flex items-center gap-1 shadow-sm">
+            <span
+              class="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider shadow-sm">Live</span>
+            <span
+              class="bg-black/60 backdrop-blur-md text-white text-xs font-medium px-2 py-1 rounded flex items-center gap-1 shadow-sm">
               <span class="material-symbols-outlined text-[14px]">visibility</span>
               <span id="viewerCount">67</span>
             </span>
@@ -164,17 +257,21 @@
         <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div class="space-y-2">
             <!-- [Content Awareness] Changed Title to actual stream title -->
-            <h1 class="text-2xl md:text-3xl font-extrabold text-on-background tracking-tight leading-tight">圓盤魚與霓虹燈魚的療癒餵食時光</h1>
-            
+            <h1 class="text-2xl md:text-3xl font-extrabold text-on-background tracking-tight leading-tight">
+              圓盤魚與霓虹燈魚的療癒餵食時光</h1>
+
             <!-- Enlarged Species Chips -->
             <div class="flex flex-wrap gap-2 items-center">
               <span class="text-sm font-bold text-on-surface-variant uppercase mr-1">分類:</span>
-              <span class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">圓盤魚</span>
-              <span class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">霓虹燈魚</span>
-              <span class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">亞馬遜劍草</span>
+              <span
+                class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">圓盤魚</span>
+              <span
+                class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">霓虹燈魚</span>
+              <span
+                class="bg-surface-container-high text-on-surface hover:bg-primary hover:text-white cursor-pointer px-3 py-1 rounded-md text-xs font-semibold transition-colors shadow-sm border border-outline-variant/20">亞馬遜劍草</span>
             </div>
           </div>
-          
+
           <div class="flex gap-3 shrink-0">
             <!-- Minimal User Effort: Share button -->
             <button
@@ -184,52 +281,101 @@
             </button>
           </div>
         </div>
+        <div class="card">
 
+          <div class="toggle-row">
+            <span class="row-label">自動餵食</span>
+            <div class="toggle-container active" data-name="自動餵食" onclick="toggleState(this)" tabindex="0" role="switch"
+              aria-checked="true"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleState(this);}">
+              <div class="toggle-track">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+            <span class="status-label on">ON</span>
+          </div>
+
+          <div class="toggle-row">
+            <span class="row-label">夜間照明</span>
+            <div class="toggle-container" data-name="夜間照明" onclick="toggleState(this)" tabindex="0" role="switch"
+              aria-checked="false"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleState(this);}">
+              <div class="toggle-track">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+            <span class="status-label">OFF</span>
+          </div>
+
+          <div class="toggle-row">
+            <span class="row-label">過濾循環</span>
+            <div class="toggle-container active" data-name="過濾循環" onclick="toggleState(this)" tabindex="0" role="switch"
+              aria-checked="true"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleState(this);}">
+              <div class="toggle-track">
+                <div class="toggle-knob"></div>
+              </div>
+            </div>
+            <span class="status-label on">ON</span>
+          </div>
+
+        </div>
+
+
+        </script>
         <!-- [UPDATE: User Experience & Content Awareness] Creator Profile & Bio Area -->
-        <div class="bg-surface-container-lowest p-5 md:p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col sm:flex-row gap-5 items-start relative mt-2">
-            
-            <!-- Creator Avatar & Link -->
-            <div class="flex flex-col items-center gap-3 shrink-0 sm:w-28">
-                <a href="./profile" class="relative group block" title="前往實況主個人頁面">
-                    <img class="w-20 h-20 rounded-full border-[3px] border-surface-container-lowest outline outline-2 outline-primary object-cover shadow-sm group-hover:scale-105 transition-transform duration-300" src="https://i.pravatar.cc/150?img=11" alt="亞洲統神 Avatar">
-                    <!-- Hover Overlay for UX feedback -->
-                    <div class="absolute inset-0 rounded-full bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                </a>
-                
-                <!-- Explicit CTA Link -->
-                <a href="./profile" class="w-full text-center bg-primary-container text-on-primary-container text-[11px] font-bold px-3 py-1.5 rounded-md hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
-                    前往頻道 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                </a>
+        <div
+          class="bg-surface-container-lowest p-5 md:p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col sm:flex-row gap-5 items-start relative mt-2">
+
+          <!-- Creator Avatar & Link -->
+          <div class="flex flex-col items-center gap-3 shrink-0 sm:w-28">
+            <a href="./profile" class="relative group block" title="前往實況主個人頁面">
+              <img
+                class="w-20 h-20 rounded-full border-[3px] border-surface-container-lowest outline outline-2 outline-primary object-cover shadow-sm group-hover:scale-105 transition-transform duration-300"
+                src="https://i.pravatar.cc/150?img=11" alt="亞洲統神 Avatar">
+              <!-- Hover Overlay for UX feedback -->
+              <div
+                class="absolute inset-0 rounded-full bg-black/0 group-hover:bg-black/10 transition-colors duration-300">
+              </div>
+            </a>
+
+            <!-- Explicit CTA Link -->
+            <a href="./profile"
+              class="w-full text-center bg-primary-container text-on-primary-container text-[11px] font-bold px-3 py-1.5 rounded-md hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-1 shadow-sm">
+              前往頻道 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Bio Content -->
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-extrabold text-on-surface flex items-center gap-1.5">
+                <a href="./profile" class="hover:text-primary transition-colors">亞洲統神</a>
+                <span class="material-symbols-outlined text-primary text-[20px]" title="官方認證實況主">verified</span>
+              </h3>
+              <button
+                class="hidden sm:flex items-center gap-1 text-sm font-bold text-primary hover:text-primary-dim transition-colors px-3 py-1 bg-teal-50 rounded-full">
+                <span class="material-symbols-outlined text-[16px]">add</span> 追蹤
+              </button>
             </div>
 
-            <!-- Bio Content -->
-            <div class="flex-1 flex flex-col justify-center">
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-xl font-extrabold text-on-surface flex items-center gap-1.5">
-                        <a href="./profile" class="hover:text-primary transition-colors">亞洲統神</a>
-                        <span class="material-symbols-outlined text-primary text-[20px]" title="官方認證實況主">verified</span>
-                    </h3>
-                    <button class="hidden sm:flex items-center gap-1 text-sm font-bold text-primary hover:text-primary-dim transition-colors px-3 py-1 bg-teal-50 rounded-full">
-                        <span class="material-symbols-outlined text-[16px]">add</span> 追蹤
-                    </button>
-                </div>
-                
-                <p class="text-sm md:text-base text-on-surface-variant leading-relaxed">
-                    致力於推廣統神的健康狀況，養殖專家親自把關。希望在繁忙的生活中，為大家提供一個可以沉澱心靈的放鬆角落。歡迎在聊天室中與各方同好交流飼養心得！
-                </p>
-            </div>
+            <p class="text-sm md:text-base text-on-surface-variant leading-relaxed">
+              致力於推廣統神的健康狀況，養殖專家親自把關。希望在繁忙的生活中，為大家提供一個可以沉澱心靈的放鬆角落。歡迎在聊天室中與各方同好交流飼養心得！
+            </p>
+          </div>
         </div>
       </div>
 
       <!-- Sidebar: Chat Room -->
-      <div class="lg:col-span-4 flex flex-col h-[700px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20">
+      <div
+        class="lg:col-span-4 flex flex-col h-[700px] bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/20">
         <div class="p-4 border-b border-outline-variant/20 flex items-center justify-between bg-surface-container-low">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">forum</span>
             <h2 class="font-bold text-on-surface">聊天室</h2>
           </div>
           <span class="text-xs font-bold text-on-surface-variant flex items-center gap-1">
-              <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span> 即時連線
+            <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span> 即時連線
           </span>
         </div>
 
@@ -255,9 +401,11 @@
 
     <!-- Metric Bento Grid -->
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-      <div class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
-            <span class="material-symbols-outlined text-[16px]">device_thermostat</span> 溫度
+      <div
+        class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
+        <span
+          class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
+          <span class="material-symbols-outlined text-[16px]">device_thermostat</span> 溫度
         </span>
         <div class="flex items-baseline gap-2">
           <span id="tempValue" class="text-4xl font-extrabold text-on-surface">26.5</span>
@@ -268,9 +416,11 @@
         </div>
       </div>
 
-      <div class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
-            <span class="material-symbols-outlined text-[16px]">water_drop</span> PH值
+      <div
+        class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
+        <span
+          class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
+          <span class="material-symbols-outlined text-[16px]">water_drop</span> PH值
         </span>
         <div class="flex items-baseline gap-2">
           <span id="phValue" class="text-4xl font-extrabold text-on-surface">6.8</span>
@@ -281,9 +431,11 @@
         </div>
       </div>
 
-      <div class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
-            <span class="material-symbols-outlined text-[16px]">blur_on</span> 總溶解固體
+      <div
+        class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
+        <span
+          class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
+          <span class="material-symbols-outlined text-[16px]">blur_on</span> 總溶解固體
         </span>
         <div class="flex items-baseline gap-2">
           <span id="nitrateValue" class="text-4xl font-extrabold text-on-surface">12</span>
@@ -296,49 +448,61 @@
 
       <div class="bg-primary-container p-6 rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
         <div class="absolute -right-4 -bottom-4 opacity-10">
-            <span class="material-symbols-outlined text-[120px]">health_and_safety</span>
+          <span class="material-symbols-outlined text-[120px]">health_and_safety</span>
         </div>
-        <span class="text-xs font-bold font-label uppercase tracking-widest text-on-primary-container flex items-center gap-1 mb-2 relative z-10">
-            <span class="material-symbols-outlined text-[16px]">monitoring</span> 魚缸狀況
+        <span
+          class="text-xs font-bold font-label uppercase tracking-widest text-on-primary-container flex items-center gap-1 mb-2 relative z-10">
+          <span class="material-symbols-outlined text-[16px]">monitoring</span> 魚缸狀況
         </span>
         <div class="flex items-baseline gap-2 relative z-10">
           <span id="healthStatus" class="text-4xl font-extrabold text-on-primary-container">良好</span>
         </div>
         <span class="text-xs font-bold text-on-primary-container/80 mt-2 flex items-center gap-1 relative z-10">
-            <span class="material-symbols-outlined text-[14px]">schedule</span> 上線時間: 432 天
+          <span class="material-symbols-outlined text-[14px]">schedule</span> 上線時間: 432 天
         </span>
       </div>
     </div>
   </main>
 
   <!-- [LAYOUT] Bottom Status Bar -->
-  <footer class="fixed bottom-0 w-full bg-white border-t border-outline-variant px-6 py-2 flex justify-between items-center z-40 text-xs font-medium text-on-surface-variant shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
-      <div class="flex items-center gap-4">
-          <div class="flex items-center gap-1.5">
-              <span class="flex h-2.5 w-2.5 relative">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-              </span>
-              <span>系統狀態: 正常連線中</span>
-          </div>
-          <span class="hidden sm:inline border-l border-outline-variant pl-4">線上使用者: 306 位</span>
+  <footer
+    class="fixed bottom-0 w-full bg-white border-t border-outline-variant px-6 py-2 flex justify-between items-center z-40 text-xs font-medium text-on-surface-variant shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1.5">
+        <span class="flex h-2.5 w-2.5 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+        </span>
+        <span>系統狀態: 正常連線中</span>
       </div>
-      <div class="flex gap-4">
-          <a href="#" class="hover:text-primary transition-colors">關於我們</a>
-          <a href="#" class="hover:text-primary transition-colors">服務條款</a>
-      </div>
+      <span class="hidden sm:inline border-l border-outline-variant pl-4">線上使用者: 306 位</span>
+    </div>
+    <div class="flex gap-4">
+      <a href="#" class="hover:text-primary transition-colors">關於我們</a>
+      <a href="#" class="hover:text-primary transition-colors">服務條款</a>
+    </div>
   </footer>
 
   <script>
     // ----- Demo Data (When not connected to backend) -----
     let messages = [
-        { user: "管理員", time: "10:00 AM", text: "歡迎來到 PheeShing.TV！請遵守聊天室規範。" }
+      { user: "管理員", time: "10:00 AM", text: "歡迎來到 PheeShing.TV！請遵守聊天室規範。" }
     ];
+    function toggleState(el) {
+      el.classList.toggle('active');
+      const isActive = el.classList.contains('active');
+      el.setAttribute('aria-checked', isActive);
+
+      const label = el.parentElement.querySelector('.status-label');
+      label.textContent = isActive ? 'ON' : 'OFF';
+      label.classList.toggle('on', isActive);
+    }
+
 
     function renderMessages() {
       const messagesList = document.getElementById('messagesList');
-      if(messagesList) {
-          messagesList.innerHTML = messages.map(msg => `
+      if (messagesList) {
+        messagesList.innerHTML = messages.map(msg => `
             <div class="bg-surface-container-lowest p-3 rounded-lg shadow-sm border border-outline-variant/10">
               <div class="flex justify-between items-center mb-1">
                 <span class="text-xs font-bold text-teal-700">${msg.user}</span>
@@ -347,7 +511,7 @@
               <p class="text-sm text-on-surface leading-snug">${msg.text}</p>
             </div>
           `).join('');
-          messagesList.scrollTop = messagesList.scrollHeight;
+        messagesList.scrollTop = messagesList.scrollHeight;
       }
     }
     renderMessages();
@@ -373,7 +537,7 @@
       const viewers = Math.floor(Math.random() * 50) + 130;
       document.getElementById('viewerCount').textContent = viewers;
     }
-    
+
     function copyLink() {
       const url = window.location.href;
       navigator.clipboard.writeText(url).then(() => {
@@ -385,11 +549,11 @@
 
     // ----- UI clock update (Content Awareness) -----
     function updateClock() {
-        const now = new Date();
-        const clockElem = document.getElementById('systemClock');
-        if(clockElem) {
-            clockElem.textContent = now.toLocaleTimeString('zh-TW', { hour12: false });
-        }
+      const now = new Date();
+      const clockElem = document.getElementById('systemClock');
+      if (clockElem) {
+        clockElem.textContent = now.toLocaleTimeString('zh-TW', { hour12: false });
+      }
     }
 
     setInterval(updateMetrics, 5000);
@@ -404,7 +568,7 @@
         const response = await fetch("{{ route('messages.get') }}");
         const messagesData = await response.json();
         const list = document.getElementById('messagesList');
-        
+
         list.innerHTML = messagesData.map(msg => {
           const time = new Date(msg.created_at).toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
           const isMe = msg.user_name === "{{ session('user_name') }}";
@@ -421,7 +585,7 @@
         }).join('');
 
         list.scrollTop = list.scrollHeight;
-      } catch (e) { 
+      } catch (e) {
         // 捕捉未啟動伺服器時的錯誤
       }
     }
@@ -440,21 +604,21 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}" 
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
           },
           body: JSON.stringify({ content: content })
         });
 
         if (res.ok) {
-          input.value = ''; 
-          fetchMessages(); 
-        }
-      } catch (e) { 
-          const now = new Date();
-          const timeStr = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
-          messages.push({ user: "Guest (Demo)", time: timeStr, text: content });
-          renderMessages();
           input.value = '';
+          fetchMessages();
+        }
+      } catch (e) {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+        messages.push({ user: "Guest (Demo)", time: timeStr, text: content });
+        renderMessages();
+        input.value = '';
       }
     }
 
@@ -470,4 +634,5 @@
     setInterval(fetchMessages, 3000);
   </script>
 </body>
+
 </html>
