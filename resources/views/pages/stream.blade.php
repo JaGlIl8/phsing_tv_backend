@@ -420,11 +420,11 @@
         class="bg-surface-container-lowest p-6 rounded-xl flex flex-col justify-between border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow">
         <span
           class="text-xs font-bold font-label uppercase tracking-widest text-on-surface-variant flex items-center gap-1 mb-2">
-          <span class="material-symbols-outlined text-[16px]">water_drop</span> PH值
+          <span class="material-symbols-outlined text-[16px]">water_drop</span> 水位
         </span>
         <div class="flex items-baseline gap-2">
-          <span id="phValue" class="text-4xl font-extrabold text-on-surface">6.8</span>
-          <span class="text-lg font-bold text-secondary">pH</span>
+          <span id="water_level_raw" class="text-4xl font-extrabold text-on-surface">6.8</span>
+          <span class="text-lg font-bold text-secondary">%</span>
         </div>
         <div class="w-full bg-surface-container-highest h-2 rounded-full mt-3 overflow-hidden">
           <div id="phBar" class="bg-secondary h-full w-[60%] transition-all duration-500 ease-out"></div>
@@ -438,11 +438,11 @@
           <span class="material-symbols-outlined text-[16px]">blur_on</span> 總溶解固體
         </span>
         <div class="flex items-baseline gap-2">
-          <span id="nitrateValue" class="text-4xl font-extrabold text-on-surface">12</span>
+          <span id="tdsValue" class="text-4xl font-extrabold text-on-surface">12</span>
           <span class="text-lg font-bold text-tertiary">ppm</span>
         </div>
         <div class="w-full bg-surface-container-highest h-2 rounded-full mt-3 overflow-hidden">
-          <div id="nitrateBar" class="bg-tertiary h-full w-[40%] transition-all duration-500 ease-out"></div>
+          <div id="tdsBar" class="bg-tertiary h-full w-[40%] transition-all duration-500 ease-out"></div>
         </div>
       </div>
 
@@ -452,14 +452,11 @@
         </div>
         <span
           class="text-xs font-bold font-label uppercase tracking-widest text-on-primary-container flex items-center gap-1 mb-2 relative z-10">
-          <span class="material-symbols-outlined text-[16px]">monitoring</span> 魚缸狀況
+          <span class="material-symbols-outlined text-[16px]">monitoring</span> 幫浦狀況
         </span>
         <div class="flex items-baseline gap-2 relative z-10">
-          <span id="healthStatus" class="text-4xl font-extrabold text-on-primary-container">良好</span>
+          <span id="pump_status" class="text-4xl font-extrabold text-on-primary-container">良好</span>
         </div>
-        <span class="text-xs font-bold text-on-primary-container/80 mt-2 flex items-center gap-1 relative z-10">
-          <span class="material-symbols-outlined text-[14px]">schedule</span> 上線時間: 432 天
-        </span>
       </div>
     </div>
   </main>
@@ -516,26 +513,35 @@
     }
     renderMessages();
 
-    // ----- Metrics Update -----
-    function updateMetrics() {
-      const temp = (Math.random() * 2 - 1) + 26.5;
-      const ph = (Math.random() * 0.5 - 0.25) + 6.8;
-      const nitrate = (Math.random() * 4 - 2) + 12;
+    async function updateMetrics() {
+      try {
+        const response = await fetch('http://123.252.43.228:6769/sensors');
+        if (!response.ok) throw new Error('無法獲取數據');
 
-      document.getElementById('tempValue').textContent = temp.toFixed(1);
-      document.getElementById('phValue').textContent = ph.toFixed(1);
-      document.getElementById('nitrateValue').textContent = Math.round(nitrate);
+        const data = await response.json();
 
-      const tempPercent = (temp / 30) * 100;
-      const phPercent = (ph / 8) * 100;
-      const nitratePercent = (nitrate / 30) * 100;
+        // 更新數值
+        document.getElementById('tempValue').textContent = data.temperature.toFixed(1);
+        document.getElementById('water_level_raw').textContent = data.water_level_raw;
+        document.getElementById('tdsValue').textContent = data.tds_raw;
 
-      document.getElementById('tempBar').style.width = tempPercent + '%';
-      document.getElementById('phBar').style.width = phPercent + '%';
-      document.getElementById('nitrateBar').style.width = nitratePercent + '%';
+        // --- 關鍵修改：根據 pump_status 更新「魚缸狀況」 ---
+        const statusElem = document.getElementById('pump_status');
+        statusElem.textContent = data.pump_status === 0 ? '啟動中' : '已關閉';
 
-      const viewers = Math.floor(Math.random() * 50) + 130;
-      document.getElementById('viewerCount').textContent = viewers;
+        // 更新進度條
+        document.getElementById('tempBar').style.width = Math.min((data.temperature / 100) * 100, 100) + '%';
+        // 請確認您的 HTML 是否有這兩個 ID，若無請補上
+        if (document.getElementById('phBar')) document.getElementById('phBar').style.width = Math.min((data.water_level_raw / 1024) * 100, 100) + '%';
+        if (document.getElementById('tdsBar')) document.getElementById('tdsBar').style.width = Math.min((data.tds_raw / 1024) * 100, 100) + '%';
+
+        // 更新觀看人數
+        document.getElementById('viewerCount').textContent = Math.floor(Math.random() * 50) + 130;
+
+      } catch (error) {
+        console.error('更新失敗:', error);
+        document.getElementById('pump_status').textContent = '離線';
+      }
     }
 
     function copyLink() {
@@ -556,7 +562,7 @@
       }
     }
 
-    setInterval(updateMetrics, 5000);
+    setInterval(updateMetrics, 1000);
     setInterval(updateClock, 1000);
     updateClock();
   </script>
